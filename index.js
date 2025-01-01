@@ -7,9 +7,9 @@ var path = require('path');
 // make a note of the calling file's path, so that we can resolve relative
 // paths. this only works if a fresh version of this module is run on every
 // require(), so important: we clear the require() cache each time!
-var parent = module.parent;
-var parentFile = parent.filename;
-var parentDir = path.dirname(parentFile);
+// var parent = module.parent;
+// var parentFile = parent.filename;
+// var parentDir = path.dirname(parentFile);
 delete require.cache[__filename];
 
 module.exports = function requireDir(dir, opts) {
@@ -18,7 +18,7 @@ module.exports = function requireDir(dir, opts) {
     opts = opts || {};
 
     // resolve the path to an absolute one:
-    dir = path.resolve(parentDir, dir);
+    dir = path.resolve(dir);
 
     // read the directory's files:
     // note that this'll throw an error if the path isn't a directory.
@@ -65,9 +65,9 @@ module.exports = function requireDir(dir, opts) {
             var abs = path.resolve(dir, file);
 
             // ignore the calling file:
-            if (abs === parentFile) {
-                continue;
-            }
+            // if (abs === parentFile) {
+            //    continue;
+            // }
             // apply file filter:
             if (opts.filter && !opts.filter(abs)) {
                 continue;
